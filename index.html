@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator e-KTA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+  <div>
+    <h1>Generator e-KTA</h1>
+    <p class="sub">Isi data anggota untuk membuat Kartu Tanda Anggota digital lengkap dengan QR code.</p>
+
+    <div class="panel">
+      <label>Foto Anggota</label>
+      <div class="photo-drop" id="photoDrop">Klik untuk unggah foto (rasio 3:4)</div>
+      <input type="file" id="photoInput" accept="image/*">
+
+      <label for="fName">Nama Lengkap</label>
+      <input type="text" id="fName" value="Ahmad Fauzan Ramadhan" maxlength="40">
+
+      <label for="fAngkatan">Angkatan</label>
+      <input type="text" id="fAngkatan" value="2026" maxlength="12">
+
+      <label for="fJabatan">Jabatan</label>
+      <input type="text" id="fJabatan" value="Anggota" maxlength="24">
+
+      <label for="fReg">Nomor Registrasi</label>
+      <input type="text" id="fReg" value="Belum terdaftar" maxlength="20" readonly>
+
+      <div class="btnbar">
+        <button class="btn-primary" id="btnRegister">Daftarkan &amp; Buat QR</button>
+      </div>
+      <p class="status" id="statusMsg"></p>
+
+      <div class="btnbar">
+        <button class="btn-primary" id="btnDownload">Unduh Kartu (PNG)</button>
+        <button class="btn-ghost" id="btnFlip">Balik Kartu</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="card-scene">
+      <div class="card" id="card">
+        <div class="face face-front" id="cardFront">
+          <svg class="guilloche" viewBox="0 0 500 315" preserveAspectRatio="none">
+            <defs>
+              <pattern id="gp" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+                <path d="M-10 20 Q10 0 30 20 T70 20" fill="none" stroke="#C9A227" stroke-width="0.6"/>
+                <path d="M-10 30 Q10 10 30 30 T70 30" fill="none" stroke="#C9A227" stroke-width="0.6"/>
+              </pattern>
+            </defs>
+            <rect width="500" height="315" fill="url(#gp)"/>
+          </svg>
+
+          <div class="front-top">
+            <div class="emblem" id="emblemLetter">K</div>
+            <div>
+              <div class="org-name" id="orgNameOut">Koordinator Olahraga Mahasiswa</div>
+              <div class="kta-label">Universitas Pasundan</div>
+            </div>
+          </div>
+
+          <div class="front-body">
+            <div class="photo-box" id="photoBox">
+              <div class="ph-placeholder">Foto 3x4</div>
+            </div>
+            <div class="data-col">
+              <div class="name-val" id="outName">Ahmad Fauzan Ramadhan</div>
+              <div class="row2">
+                <div class="dl">
+                  <div class="dl-label">Angkatan</div>
+                  <div class="dl-val" id="outAngkatan">2026</div>
+                </div>
+                <div class="dl">
+                  <div class="dl-label">Jabatan</div>
+                  <div class="dl-val" id="outJabatan">Anggota</div>
+                </div>
+              </div>
+              <div class="dl">
+                <div class="dl-label">No. Registrasi</div>
+                <div class="dl-val mono" id="outReg">KOM-2026-0147</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="front-foot">
+            <div class="qr-box" id="qrBox"></div>
+          </div>
+          <div class="gold-bar"></div>
+        </div>
+
+        <div class="face face-back">
+          <svg class="guilloche" viewBox="0 0 500 315" preserveAspectRatio="none">
+            <rect width="500" height="315" fill="url(#gp)"/>
+          </svg>
+          <div class="back-frame"></div>
+          <div class="back-content">
+            <div class="back-emblem" id="emblemLetterBack">K</div>
+            <div class="back-org-name" id="orgNameOutBack">Koordinator Olahraga Mahasiswa </div>
+            <div class="back-rule"></div>
+            <div class="back-tagline">Universitas Pasundan</div>
+          </div>
+          <div class="back-foot">Berlaku s.d. <span id="outValid">Agustus 2028</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="hint">Kartu diperbarui otomatis saat kamu mengisi form di sebelah kiri.</p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
